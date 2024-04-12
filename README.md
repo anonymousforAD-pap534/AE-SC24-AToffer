@@ -1,5 +1,5 @@
 # AToffer
-The code and example data for paper "AToffer: Automatic Operator Fusion Framework for Sparse Transformer Inference"
+The code and example data for paper "AToffer: Automatic Operator Fusion Framework for Sparse Transformer Inference".
 
 ## Getting Started
 + Hardware 
@@ -20,9 +20,9 @@ pip install -r requirements.txt
 ## File Organization
 + `script/`: Python script of comparison experiments. hash encoder and search mechanism in AToffer.
     + `syncfree.py`: the basic script using customized kernels to verify whether the environment is configured correctly.
-    + `eva_A_MHA_script.py`: the script to run comparsion evaluation of MHA 
+    + `eva_A_MHA_script.py`: the script to run comparsion evaluation of MHA.
     + `eva_B_end2end_script/`: run comparsion evaluation of End2end forward of BERT forward.
-    + `eva_C_search_script/`: 5round * 128 iter to search the optimal fusion scheme in search space.
+    + `eva_C_search_script/`: 5 round * 128 iter to search the optimal fusion scheme in search space.
     + `eva_D_cost_analysis_script/`: the script to analyze the synchronization cost and search cost.
 + `src/`: CUDA code of customized kernels for MHA in sparse Transformer.
     + `syncfree_attention.cu & syncfree_attention.cpp`: CUDA code of customized kernels for MHA in sparse Transformer.
@@ -52,12 +52,12 @@ cd script/eva_B_end2end_script
 python B_batchtest.py Nvidia_3090
 ```
 
-4. Run search script to get the optimized fusion scheme of sparse Transformer (take BERT forward for a study case)
+4. Run search script to get the optimized fusion scheme of sparse Transformer (take BERT forward for a study case).
 ```shell
 cd script/eva_C_search_script
 python C_search_all_script.py
 ```
-5. Use [NVIDIA Nsight System](https://developer.nvidia.com/nsight-systems) to analyze the synchronization cost whose ratio is displayed by `cudaStreamSynchronize`
+5. Use [NVIDIA Nsight System](https://developer.nvidia.com/nsight-systems) to analyze the synchronization cost whose ratio is displayed by `cudaStreamSynchronize`.
 ```shell
 # seq_len = 64, 128, 256, 384, 512, 768, 1024
 cd script/eva_D_cost_analysis_script
@@ -65,7 +65,7 @@ nsys profile --stat=true -o base_rep64 python eva_D1_SyncCost_base.py 64
 nsys profile --stat=true -o ours_rep64 python eva_D1_SyncCost_ours.py 64
 ```
 
-6. To analyze the overhead of reward-based search mechanism in AToffer
+6. To analyze the overhead of reward-based search mechanism in AToffer.
 ```shell
 # seq_len = 256 mask_id = 1 (type of sparse mask: 1 for strided, 2 for fixed)
 cd script/eva_D_cost_analysis_script
