@@ -33,7 +33,7 @@ pip install -r requirements.txt
 + `plt_script/`: the python script to draw the performance figure.
 
 
-## Reproduce implement in *AToffer*
+## Reproduce implement in AToffer
 1. To verify the environment, enter the directory of `script` and try to execute a demo script using customized kernels.
 ```shell
 # batch_size = 8, layer_num = 12, seq_len = 256, head_num = 12, head_size = 64
