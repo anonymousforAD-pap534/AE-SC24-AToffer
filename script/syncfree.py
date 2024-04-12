@@ -1,4 +1,3 @@
-#  python syncfree1.py 8 1 256 12 64 1
 import argparse
 import timeit
 import torch

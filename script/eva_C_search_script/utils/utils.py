@@ -34,8 +34,12 @@ def sequence_mask(lengths, max_len=None, is_2d=True):
 
 def transpose_for_scores(x, n_heads, head_size):
     # (B, S, D) -split-> (B, S, H, W) -trans-> (B, H, S, W)
+    
+    # 取x的除最后一个维度外的所有维度 加完了以后 = (batch_size, seq_len, n_heads, head_size)
     new_x_shape = x.size()[:-1] + (n_heads, head_size)
     x = x.view(new_x_shape)
+    # x的维度变化 (batch_size, seq_len, hidden_dim) --- (batch_size, head_num, seq_len, head_size)
+    # 自动的拆开了 最后一个维度 hidden_dim
     return x.permute(0, 2, 1, 3)
 
 def transpose_for_scores1(x):

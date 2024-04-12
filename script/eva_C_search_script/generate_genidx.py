@@ -206,8 +206,7 @@ def main():
     print("  mask_name:", mask_name, "  if_fused:", if_fused, "  if_handwritten:", if_handwritten, "  segment_num:", segment_num, segments)
     filename = mask_name + "fused_forward"
     
-    
-    code_start = 102
+    code_start = 95
     code_end = code_start + 41
     import_end = 17  
     

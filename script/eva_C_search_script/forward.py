@@ -12,7 +12,7 @@ path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 syncfree_attention = load(
     name = "syncfree_attention",
-    sources = [os.path.join(path, "src/syncfree_attention.cu"), os.path.join(path, "src/syncfree_attention.cpp")],
+    sources = [os.path.join(path, "../../src/syncfree_attention.cu"), os.path.join(path, "../../src/syncfree_attention.cpp")],
     verbose = False,
 )
 
@@ -42,7 +42,6 @@ def bert_forward(args):
     lower_triangle_mask = generate_triangle_mask(attr_mask).cuda()
     strided_mask = generate_strided_mask(attr_mask).cuda()
     fixed_mask = generate_fixed_mask(attr_mask).cuda()
-    
     
     if(mask_id == 1): 
         mask_name = 'Strided_mask'
