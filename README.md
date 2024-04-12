@@ -18,14 +18,14 @@ pip install -r requirements.txt
 ```
 
 ## File Organization
-+ `script/`: Python script of comparsion experiments. hash encoder and search mechamism in *AToffer* 
-    + `syncfree.py`: the basic script using customized kernels to verify whether the envrioment is configred correctly.
++ `script/`: Python script of comparison experiments. hash encoder and search mechanism in *AToffer* 
+    + `syncfree.py`: the basic script using customized kernels to verify whether the environment is configured correctly.
     + `eva_A_MHA_script.py`: the script to run comparsion evaluation of MHA 
     + `eva_B_end2end_script/`: run comparsion evaluation of End2end forward of BERT forward.
     + `eva_C_search_script/`: 5round * 128 iter to search the optimal fusion scheme in search space.
-    + `eva_D_cost_analysis_script/`: the script to analyse the synchronization cost and search cost.
+    + `eva_D_cost_analysis_script/`: the script to analyze the synchronization cost and search cost.
     + `forward.py`: a complete forward calculation process for BERT.
-    + `generated_genidx.py`: generate code with a specfic fusion scheme, containing Hash encoder.  
+    + `generated_genidx.py`: generate code with a specific fusion scheme, containing Hash encoder.  
 + `src/`: CUDA code of customized kernels for MHA in sparse Transformer.
 + `utils/`: some components that are frequently used in code.
 + `example_data/`: the raw experiments result on our device.
@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 
 ## Reproduce implement in *AToffer*
-1. To verify the envrioment, enter the dir of `script` and try to execute a demo script using customized kernels.
+1. To verify the environment, enter the directory of `script` and try to execute a demo script using customized kernels.
 ```shell
 # batch_size = 8, layer_num = 12, seq_len = 256, head_num = 12, head_size = 64
 # mask_id = 1 (type of sparse mask: 1 for strided, 2 for fixed)
@@ -56,7 +56,7 @@ python B_batchtest.py Nvidia_3090
 cd script/eva_C_search_script
 python C_search_all_script.py
 ```
-5. Use [Nvidia Nsight System](https://developer.nvidia.com/nsight-systems) to analyse the synchronization cost whose ratio is displayed by *cudaStreamSynchronize* 
+5. Use [NVIDIA Nsight System](https://developer.nvidia.com/nsight-systems) to analyze the synchronization cost whose ratio is displayed by *cudaStreamSynchronize* 
 ```shell
 # seq_len = 64, 128, 256, 384, 512, 768, 1024
 cd script/eva_D_cost_analysis_script
@@ -64,7 +64,7 @@ nsys profile --stat=true -o base_rep64 python eva_D1_SyncCost_base.py 64
 nsys profile --stat=true -o ours_rep64 python eva_D1_SyncCost_ours.py 64
 ```
 
-6. To analyse the overhead of reward-based search mechamism in *AToffer*
+6. To analyze the overhead of reward-based search mechanism in *AToffer*
 ```shell
 # seq_len = 256 mask_id = 1 (type of sparse mask: 1 for strided, 2 for fixed)
 cd script/eva_D_cost_analysis_script
