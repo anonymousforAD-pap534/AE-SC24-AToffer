@@ -34,7 +34,7 @@ pip install -r requirements.txt
 
 
 ## Reproduce implement in AToffer
-1. To verify the environment, enter the directory of `script` and try to execute a demo script using customized kernels.
+1. Verify the environment, enter the directory of `script` and try to execute a demo script using customized kernels.
 ```shell
 # batch_size = 8, layer_num = 12, seq_len = 256, head_num = 12, head_size = 64
 # mask_id = 1 (type of sparse mask: 1 for strided, 2 for fixed)
@@ -45,7 +45,7 @@ python syncfree.py 8 1 256 12 64 1
 # platform = Nvidia_3090, this according to your platform
 python eva_A_MHA_script.py Nvidia_3090
 ```
-3. Comparsion evaluation with Native PyTorch & PyTorch JIT of End2end BERT inference.
+3. Run comparsion evaluation with Native PyTorch & PyTorch JIT of End2end BERT inference.
 ```shell
 cd script/eva_B_end2end_script
 # platform = Nvidia_3090, this according to your platform
@@ -65,7 +65,7 @@ nsys profile --stat=true -o base_rep64 python eva_D1_SyncCost_base.py 64
 nsys profile --stat=true -o ours_rep64 python eva_D1_SyncCost_ours.py 64
 ```
 
-6. To analyze the overhead of reward-based search mechanism in AToffer.
+6. Analyze the overhead of reward-based search mechanism in AToffer.
 ```shell
 # seq_len = 256 mask_id = 1 (type of sparse mask: 1 for strided, 2 for fixed)
 cd script/eva_D_cost_analysis_script
