@@ -18,19 +18,19 @@ pip install -r requirements.txt
 ```
 
 ## File Organization
-+ `script/`: Python script of comparison experiments. hash encoder and search mechanism in AToffer.
++ `script/`: the Python script of comparison experiments. hash encoder and search mechanism in AToffer.
     + `syncfree.py`: the basic script using customized kernels to verify whether the environment is configured correctly.
-    + `eva_A_MHA_script.py`: the script to run comparsion evaluation of MHA.
-    + `eva_B_end2end_script/`: run comparsion evaluation of End2end forward of BERT forward.
-    + `eva_C_search_script/`: 5 round * 128 iter to search the optimal fusion scheme in search space.
-    + `eva_D_cost_analysis_script/`: the script to analyze the synchronization cost and search cost.
-+ `src/`: CUDA code of customized kernels for MHA in sparse Transformer.
+    + `eva_A_MHA_script.py`: run comparsion evaluation of MHA.
+    + `eva_B_end2end_script/`: run comparsion evaluation of End2end BERT inference.
+    + `eva_C_search_script/`: run 5 rounds * 128 iterations to search the optimal fusion scheme in search space.
+    + `eva_D_cost_analysis_script/`: analyze the synchronization cost and search cost.
++ `src/`: the source code of customized kernels and hash encoder.
     + `syncfree_attention.cu & syncfree_attention.cpp`: CUDA code of customized kernels for MHA in sparse Transformer.
     + `forward.py`: a complete forward calculation process for BERT.
     + `generated_genidx.py`: generate code with a specific fusion scheme, containing Hash encoder. 
     + `utils/`: some components that are frequently used in code.
-+ `example_data/`: the raw experiments result on our device.
-+ `plt_script/`: the python script to draw the performance figure.
++ `example_data/`: the raw experimential results on our device.
++ `plt_script/`: the Python script to draw the performance figure.
 
 
 ## Reproduce implement in AToffer
@@ -45,19 +45,19 @@ python syncfree.py 8 1 256 12 64 1
 # platform = Nvidia_3090, this according to your platform
 python eva_A_MHA_script.py Nvidia_3090
 ```
-3. Comparsion evaluation with Native PyTorch & PyTorch JIT of End2end forward of BERT forward.
+3. Comparsion evaluation with Native PyTorch & PyTorch JIT of End2end BERT inference.
 ```shell
 cd script/eva_B_end2end_script
 # platform = Nvidia_3090, this according to your platform
 python B_batchtest.py Nvidia_3090
 ```
 
-4. Run search script to get the optimized fusion scheme of sparse Transformer (take BERT forward for a study case).
+4. Run search script to get the optimized fusion scheme of sparse Transformer (take BERT's forward for a study case).
 ```shell
 cd script/eva_C_search_script
 python C_search_all_script.py
 ```
-5. Use [NVIDIA Nsight System](https://developer.nvidia.com/nsight-systems) to analyze the synchronization cost whose ratio is displayed by `cudaStreamSynchronize`.
+5. Use [NVIDIA Nsight System](https://developer.nvidia.com/nsight-systems) to analyze the synchronization cost which is displayed by `cudaStreamSynchronize`.
 ```shell
 # seq_len = 64, 128, 256, 384, 512, 768, 1024
 cd script/eva_D_cost_analysis_script
